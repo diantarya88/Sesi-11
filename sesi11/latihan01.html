@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan 1 JSON</title>
+</head>
+<body>
+
+    Nama : <span id="txNAMA"></span><br>
+    TMPT/TGL Lahir : <span id="txTMPTGL"></span><br>
+    Jenis Kelamin : <span id="txJK"></span><br>
+    Alamat : <span id="txALAMAT"></span><br>
+    Jurusan : <span id="txJURUSAN"></span>
+
+    <script>
+        const bcadta = new XMLHttpRequest();
+        bcadta.open("GET","http://localhost/sesi11/latihan01.php");
+        bcadta.send();
+
+        bcadta.onload = function(){
+            const dta = JSON.parse(this.responseText);
+
+            console.log(dta);
+            let jkel = "Laki-Laki";
+            if(dta.JKEL=="P")
+                jkel = "Perempuan";
+
+
+            document.getElementById("txNAMA").innerHTML=dta.NAMA
+            document.getElementById("txTMPTGL").innerHTML=dta.TMPT_TGL_LAHIR
+            document.getElementById("txJK").innerHTML=jkel
+            document.getElementById("txALAMAT").innerHTML=dta.ALAMAT
+            document.getElementById("txJURUSAN").innerHTML=dta.JURUSAN
+        }
+    </script>
+
+</body>
+</html>
